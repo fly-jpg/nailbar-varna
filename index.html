@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Nail bar Varna · маникюр, педикюр, мигли, вежди, еко тен</title>
+  <meta name="description" content="Nail bar Varna: маникюр, педикюр, тръстиков тен, мигли и вежди. ул. Поп Харитон 8, Варна. Всеки ден 10:00–20:00.">
+  <meta name="theme-color" content="#E0528A">
+  <meta property="og:title" content="Nail bar Varna">
+  <meta property="og:description" content="Твоята beauty-точка наблизо. Маникюр, педикюр, мигли, вежди, еко тен.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23E0528A'/%3E%3Ctext x='32' y='42' font-family='Arial' font-weight='700' font-size='30' fill='white' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="blobs" aria-hidden="true">
+    <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+  </div>
+
+  <header class="nav" id="top">
+    <a class="logo" href="#top" aria-label="Nail bar Varna">
+      <span class="logo-dot">N</span>
+      <span class="logo-text">Nail bar<small>varna</small></span>
+    </a>
+    <nav class="menu" id="menu">
+      <a href="#services" data-i18n="nav.services"></a>
+      <a href="#gallery" data-i18n="nav.gallery"></a>
+      <a href="#why" data-i18n="nav.why"></a>
+      <a href="#contacts" data-i18n="nav.contacts"></a>
+    </nav>
+    <div class="langs" role="group" aria-label="Language">
+      <button data-lang="ru">RU</button>
+      <button data-lang="uk">UA</button>
+      <button data-lang="bg">BG</button>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text reveal">
+        <p class="eyebrow" data-i18n="hero.eyebrow"></p>
+        <h1><span class="grad">Nail bar</span><br>Varna</h1>
+        <p class="lead" data-i18n="hero.lead"></p>
+        <div class="cta-row">
+          <a class="btn primary" href="#contacts" data-i18n="cta.book"></a>
+          <a class="btn ghost" href="#services" data-i18n="cta.services"></a>
+        </div>
+        <ul class="stats">
+          <li><b>4,4★</b><span data-i18n="hero.rating"></span></li>
+          <li><b>10–20</b><span data-i18n="hero.daily"></span></li>
+          <li><b>600+</b><span data-i18n="hero.looks"></span></li>
+        </ul>
+      </div>
+      <div class="hero-art reveal" aria-hidden="true">
+        <div class="orb"></div>
+        <div class="glass card-float c1"><span>💅</span><b data-i18n="s.manicure.title"></b></div>
+        <div class="glass card-float c2"><span>✨</span><b data-i18n="s.lashes.title"></b></div>
+        <div class="glass card-float c3"><span>☀️</span><b data-i18n="s.tan.title"></b></div>
+        <div class="nails">
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true"><div class="track" id="marquee"></div></div>
+
+    <section id="services" class="section">
+      <div class="section-head reveal">
+        <p class="eyebrow" data-i18n="services.eyebrow"></p>
+        <h2 data-i18n="services.title"></h2>
+      </div>
+      <div class="services" id="servicesGrid"></div>
+    </section>
+
+    <section id="gallery" class="section">
+      <div class="section-head reveal">
+        <p class="eyebrow" data-i18n="gallery.eyebrow"></p>
+        <h2 data-i18n="gallery.title"></h2>
+      </div>
+      <div class="gallery" id="galleryGrid"></div>
+      <div class="center reveal">
+        <a class="btn ghost" href="https://www.instagram.com/nailbar_varna/" target="_blank" rel="noopener" data-i18n="gallery.more"></a>
+      </div>
+    </section>
+
+    <section id="why" class="section">
+      <div class="section-head reveal">
+        <p class="eyebrow" data-i18n="why.eyebrow"></p>
+        <h2 data-i18n="why.title"></h2>
+      </div>
+      <div class="why" id="whyGrid"></div>
+      <h3 class="team-title reveal" data-i18n="team.title"></h3>
+      <div class="team" id="teamGrid"></div>
+      <div class="course glass reveal">
+        <div>
+          <p class="eyebrow" data-i18n="course.eyebrow"></p>
+          <h3 data-i18n="course.title"></h3>
+          <p data-i18n="course.text"></p>
+        </div>
+        <a class="btn primary" href="https://ig.me/m/nailbar_varna" target="_blank" rel="noopener" data-i18n="course.cta"></a>
+      </div>
+    </section>
+
+    <section id="contacts" class="section">
+      <div class="section-head reveal">
+        <p class="eyebrow" data-i18n="contacts.eyebrow"></p>
+        <h2 data-i18n="contacts.title"></h2>
+      </div>
+      <div class="contacts">
+        <div class="glass contact-card reveal">
+          <div class="row"><span class="ic">📍</span><div><small data-i18n="contacts.address"></small><b data-i18n="contacts.addressValue"></b></div></div>
+          <div class="row"><span class="ic">🕙</span><div><small data-i18n="contacts.hours"></small><b data-i18n="contacts.hoursValue"></b></div></div>
+          <div class="row"><span class="ic">📞</span><div><small data-i18n="contacts.phone"></small><b><a href="tel:+359888804197">+359 88 880 4197</a></b></div></div>
+          <p class="book-label" data-i18n="contacts.bookVia"></p>
+          <div class="book-btns">
+            <a class="pill ig" href="https://ig.me/m/nailbar_varna" target="_blank" rel="noopener">Instagram</a>
+            <a class="pill tel" href="tel:+359888804197" data-i18n="contacts.call"></a>
+            <a class="pill viber" href="viber://chat?number=%2B359888804197">Viber</a>
+            <a class="pill wa" href="https://wa.me/359888804197" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+          <a class="route" href="https://www.google.com/maps/dir/?api=1&destination=43.2104633,27.9059527" target="_blank" rel="noopener" data-i18n="contacts.route"></a>
+        </div>
+        <div class="map reveal">
+          <iframe title="Nail bar Varna map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://maps.google.com/maps?q=43.2104633,27.9059527&z=16&output=embed"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year"></span> Nail bar Varna</span>
+    <span data-i18n="footer.tag"></span>
+    <a href="https://www.instagram.com/nailbar_varna/" target="_blank" rel="noopener">@nailbar_varna</a>
+  </footer>
+
+  <a class="sticky-book" href="https://ig.me/m/nailbar_varna" target="_blank" rel="noopener" data-i18n="cta.book"></a>
+
+  <script src="app.js"></script>
+</body>
+</html>
