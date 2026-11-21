@@ -121,6 +121,46 @@ const I18N = {
   }
 };
 
+// Apps Script web app URL (see apps-script/Code.gs). Empty = form shows a "write us in Instagram" error.
+const FORM_ENDPOINT = "";
+
+Object.assign(I18N.ru, {
+  "form.open": "Напишите нам", "form.eyebrow": "Заявка", "form.title": "Напишите нам",
+  "form.lead": "Оставьте контакты, и мы перезвоним или напишем, чтобы подобрать удобное время.",
+  "form.name": "Имя", "form.phone": "Телефон", "form.service": "Услуга", "form.message": "Комментарий",
+  "form.messagePh": "Например: хочу маникюр с френчем в субботу после обеда",
+  "form.servicePh": "Выберите услугу", "form.course": "Курс маникюра", "form.other": "Другое",
+  "form.errName": "Напишите, как к вам обращаться", "form.errPhone": "Проверьте номер телефона",
+  "form.submit": "Отправить заявку", "form.sending": "Отправляем...",
+  "form.error": "Не получилось отправить. Напишите нам в Instagram или позвоните.",
+  "form.note": "Нажимая кнопку, вы соглашаетесь, что мы свяжемся с вами по этой заявке.",
+  "form.doneTitle": "Спасибо!", "form.doneText": "Заявка у нас. Скоро свяжемся с вами 💅", "form.close": "Закрыть"
+});
+Object.assign(I18N.uk, {
+  "form.open": "Напишіть нам", "form.eyebrow": "Заявка", "form.title": "Напишіть нам",
+  "form.lead": "Залиште контакти, і ми зателефонуємо або напишемо, щоб підібрати зручний час.",
+  "form.name": "Ім'я", "form.phone": "Телефон", "form.service": "Послуга", "form.message": "Коментар",
+  "form.messagePh": "Наприклад: хочу манікюр із френчем у суботу після обіду",
+  "form.servicePh": "Оберіть послугу", "form.course": "Курс манікюру", "form.other": "Інше",
+  "form.errName": "Напишіть, як до вас звертатися", "form.errPhone": "Перевірте номер телефону",
+  "form.submit": "Надіслати заявку", "form.sending": "Надсилаємо...",
+  "form.error": "Не вдалося надіслати. Напишіть нам в Instagram або зателефонуйте.",
+  "form.note": "Натискаючи кнопку, ви погоджуєтеся, що ми зв'яжемося з вами щодо цієї заявки.",
+  "form.doneTitle": "Дякуємо!", "form.doneText": "Заявка в нас. Скоро зв'яжемося з вами 💅", "form.close": "Закрити"
+});
+Object.assign(I18N.bg, {
+  "form.open": "Пиши ни", "form.eyebrow": "Заявка", "form.title": "Пиши ни",
+  "form.lead": "Остави контакт и ще ти се обадим или пишем, за да изберем удобен час.",
+  "form.name": "Име", "form.phone": "Телефон", "form.service": "Услуга", "form.message": "Коментар",
+  "form.messagePh": "Например: искам маникюр с френч в събота следобед",
+  "form.servicePh": "Избери услуга", "form.course": "Курс по маникюр", "form.other": "Друго",
+  "form.errName": "Напиши как да се обръщаме към теб", "form.errPhone": "Провери телефонния номер",
+  "form.submit": "Изпрати заявка", "form.sending": "Изпращаме...",
+  "form.error": "Не успяхме да изпратим. Пиши ни в Instagram или се обади.",
+  "form.note": "С натискането на бутона се съгласяваш да се свържем с теб по тази заявка.",
+  "form.doneTitle": "Благодарим!", "form.doneText": "Заявката е при нас. Скоро ще се свържем с теб 💅", "form.close": "Затвори"
+});
+
 const SERVICES = [
   { key: "manicure", icon: "💅", accent: "#E0528A" },
   { key: "pedicure", icon: "🦶", accent: "#FF8FB8" },
@@ -159,6 +199,7 @@ function renderDynamic(dict) {
       <h3>${dict[`s.${service.key}.title`]}</h3>
       <p>${dict[`s.${service.key}.text`]}</p>
       <ul>${dict[`s.${service.key}.list`].map(item => `<li>${item}</li>`).join("")}</ul>
+      <button class="service-book" type="button" data-open-form data-service="${I18N.ru[`s.${service.key}.title`]}">${dict["cta.book"]} →</button>
     </article>`).join("");
 
   document.getElementById("galleryGrid").innerHTML = GALLERY.map((tile, index) => `
@@ -184,6 +225,23 @@ function renderDynamic(dict) {
 
   const words = dict.marquee.map(word => `<span>${word}</span>`).join("");
   document.getElementById("marquee").innerHTML = words + words + words + words;
+
+  renderServiceOptions(dict);
+}
+
+// Option values stay in Russian so the sheet column is consistent whatever language the visitor uses.
+const SERVICE_OPTIONS = [
+  ...SERVICES.map(service => ({ value: I18N.ru[`s.${service.key}.title`], label: dict => dict[`s.${service.key}.title`] })),
+  { value: I18N.ru["form.course"], label: dict => dict["form.course"] },
+  { value: I18N.ru["form.other"], label: dict => dict["form.other"] }
+];
+
+function renderServiceOptions(dict) {
+  const select = document.getElementById("serviceSelect");
+  const selected = select.value;
+  select.innerHTML = `<option value="">${dict["form.servicePh"]}</option>` +
+    SERVICE_OPTIONS.map(option => `<option value="${option.value}">${option.label(dict)}</option>`).join("");
+  select.value = selected;
 }
 
 function setLanguage(lang) {
@@ -193,6 +251,10 @@ function setLanguage(lang) {
     const value = dict[node.dataset.i18n];
     if (typeof value === "string") node.textContent = value;
   });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(node => {
+    node.placeholder = dict[node.dataset.i18nPlaceholder];
+  });
+  currentLang = lang;
   document.querySelectorAll(".langs button").forEach(button => {
     button.classList.toggle("active", button.dataset.lang === lang);
     button.setAttribute("aria-pressed", button.dataset.lang === lang);
@@ -238,14 +300,91 @@ menu.addEventListener("click", event => {
   }
 });
 
-const stickyBook = document.querySelector(".sticky-book");
+const fab = document.querySelector(".fab");
 const contacts = document.getElementById("contacts");
 function onScroll() {
   const pastHero = window.scrollY > window.innerHeight * 0.6;
   const atContacts = contacts.getBoundingClientRect().top < window.innerHeight * 0.8;
-  stickyBook.classList.toggle("show", pastHero && !atContacts);
+  fab.classList.toggle("show", pastHero && !atContacts);
 }
 window.addEventListener("scroll", onScroll, { passive: true });
+
+let currentLang = "bg";
+const modal = document.getElementById("requestModal");
+const form = document.getElementById("requestForm");
+const formStatus = document.getElementById("formStatus");
+const submitButton = form.querySelector(".submit");
+
+function openForm(serviceValue) {
+  form.classList.remove("done");
+  formStatus.textContent = "";
+  if (serviceValue) form.elements.service.value = serviceValue;
+  modal.showModal();
+  form.elements.name.focus();
+}
+
+function closeForm() {
+  modal.close();
+  if (form.classList.contains("done")) {
+    form.reset();
+    form.classList.remove("done");
+  }
+}
+
+document.addEventListener("click", event => {
+  const opener = event.target.closest("[data-open-form]");
+  if (opener) openForm(opener.dataset.service);
+  if (event.target.closest("[data-close-form]")) closeForm();
+});
+// Click on the dimmed backdrop closes the popup.
+modal.addEventListener("click", event => { if (event.target === modal) closeForm(); });
+
+function validateField(input) {
+  const value = input.value.trim();
+  const isValid = input.name === "phone"
+    ? /^[+\d][\d\s()\-]{6,}$/.test(value)
+    : value.length >= 2;
+  input.closest(".field").classList.toggle("invalid", !isValid);
+  return isValid;
+}
+
+["name", "phone"].forEach(fieldName => {
+  form.elements[fieldName].addEventListener("input", event => {
+    if (event.target.closest(".field").classList.contains("invalid")) validateField(event.target);
+  });
+});
+
+form.addEventListener("submit", async event => {
+  event.preventDefault();
+  const nameValid = validateField(form.elements.name);
+  const phoneValid = validateField(form.elements.phone);
+  if (!nameValid || !phoneValid) return;
+
+  const dict = I18N[currentLang];
+  const payload = new URLSearchParams({
+    name: form.elements.name.value.trim(),
+    phone: form.elements.phone.value.trim(),
+    service: form.elements.service.value,
+    message: form.elements.message.value.trim(),
+    website: form.elements.website.value,
+    lang: currentLang
+  });
+
+  submitButton.disabled = true;
+  submitButton.firstElementChild.textContent = dict["form.sending"];
+  formStatus.textContent = "";
+  try {
+    if (!FORM_ENDPOINT) throw new Error("FORM_ENDPOINT is not set");
+    // no-cors: Apps Script redirects and sends no CORS headers; the row is still written.
+    await fetch(FORM_ENDPOINT, { method: "POST", mode: "no-cors", body: payload });
+    form.classList.add("done");
+  } catch (error) {
+    formStatus.textContent = dict["form.error"];
+  } finally {
+    submitButton.disabled = false;
+    submitButton.firstElementChild.textContent = dict["form.submit"];
+  }
+});
 
 document.getElementById("year").textContent = new Date().getFullYear();
 setLanguage(detectLanguage());

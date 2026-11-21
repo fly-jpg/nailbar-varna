@@ -45,7 +45,7 @@
         <h1><span class="grad">Nail bar</span><br>Varna</h1>
         <p class="lead" data-i18n="hero.lead"></p>
         <div class="cta-row">
-          <a class="btn primary" href="#contacts" data-i18n="cta.book"></a>
+          <button class="btn primary" type="button" data-open-form data-i18n="cta.book"></button>
           <a class="btn ghost" href="#services" data-i18n="cta.services"></a>
         </div>
         <ul class="stats">
@@ -121,6 +121,7 @@
             <a class="pill viber" href="viber://chat?number=%2B359888804197">Viber</a>
             <a class="pill wa" href="https://wa.me/359888804197" target="_blank" rel="noopener">WhatsApp</a>
           </div>
+          <button class="btn primary write-us" type="button" data-open-form data-i18n="form.open"></button>
           <a class="route" href="https://www.google.com/maps/dir/?api=1&destination=43.2104633,27.9059527" target="_blank" rel="noopener" data-i18n="contacts.route"></a>
         </div>
         <div class="map reveal">
@@ -137,7 +138,50 @@
     <a href="https://www.instagram.com/nailbar_varna/" target="_blank" rel="noopener">@nailbar_varna</a>
   </footer>
 
-  <a class="sticky-book" href="https://ig.me/m/nailbar_varna" target="_blank" rel="noopener" data-i18n="cta.book"></a>
+  <button class="fab" type="button" data-open-form>
+    <span aria-hidden="true">✉</span><span data-i18n="form.open"></span>
+  </button>
+
+  <dialog class="modal" id="requestModal" aria-labelledby="formTitle">
+    <form class="modal-card" id="requestForm" novalidate>
+      <button class="modal-close" type="button" data-close-form aria-label="Close">×</button>
+      <div class="form-body">
+        <p class="eyebrow" data-i18n="form.eyebrow"></p>
+        <h3 id="formTitle" data-i18n="form.title"></h3>
+        <p class="form-lead" data-i18n="form.lead"></p>
+
+        <label class="field">
+          <span data-i18n="form.name"></span>
+          <input name="name" type="text" autocomplete="name" maxlength="100" required>
+          <small class="field-error" data-i18n="form.errName"></small>
+        </label>
+        <label class="field">
+          <span data-i18n="form.phone"></span>
+          <input name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40" placeholder="+359 ..." required>
+          <small class="field-error" data-i18n="form.errPhone"></small>
+        </label>
+        <label class="field">
+          <span data-i18n="form.service"></span>
+          <select name="service" id="serviceSelect"></select>
+        </label>
+        <label class="field">
+          <span data-i18n="form.message"></span>
+          <textarea name="message" rows="3" maxlength="2000" data-i18n-placeholder="form.messagePh"></textarea>
+        </label>
+        <input class="hp" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <button class="btn primary submit" type="submit"><span data-i18n="form.submit"></span></button>
+        <p class="form-status" id="formStatus" role="status"></p>
+        <p class="form-note" data-i18n="form.note"></p>
+      </div>
+      <div class="form-done">
+        <div class="done-icon">💖</div>
+        <h3 data-i18n="form.doneTitle"></h3>
+        <p data-i18n="form.doneText"></p>
+        <button class="btn ghost" type="button" data-close-form data-i18n="form.close"></button>
+      </div>
+    </form>
+  </dialog>
 
   <script src="app.js"></script>
 </body>
