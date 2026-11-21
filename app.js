@@ -122,7 +122,7 @@ const I18N = {
 };
 
 // Apps Script web app URL (see apps-script/Code.gs). Empty = form shows a "write us in Instagram" error.
-const FORM_ENDPOINT = "";
+const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxugGL4uAG8l_JC_2fL6wdIhsaqWxDX67rkdPgkWTTLqAfxWLAZiJVUwcmr4syTnZ7x/exec";
 
 Object.assign(I18N.ru, {
   "form.open": "Напишите нам", "form.eyebrow": "Заявка", "form.title": "Напишите нам",

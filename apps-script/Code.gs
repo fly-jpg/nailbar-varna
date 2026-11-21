@@ -1,7 +1,10 @@
-// Принимает заявки с сайта и пишет их строкой в первый лист этой таблицы.
-// Вставить в таблицу: Расширения → Apps Script, затем Развернуть → Новое развертывание → Веб-приложение
+// Принимает заявки с сайта и пишет их строкой в первый лист таблицы SHEET_ID.
+// Отдельный проект на script.google.com, затем Развернуть → Новое развертывание → Веб-приложение
 // (Запуск от: Я, Доступ: Все). Полученный URL вставить в FORM_ENDPOINT в app.js.
 
+const SHEET_ID = "1h5ILzfA-mPfqHF0FCy6MY4hbUy9Oef6KG6kmt6yWLdk";
+
+const HEADERS = ["Дата и время", "Имя", "Телефон", "Услуга", "Сообщение", "Язык сайта"];
 const MAX_LENGTH = { name: 100, phone: 40, service: 80, message: 2000, lang: 5 };
 
 function doPost(event) {
@@ -16,7 +19,13 @@ function doPost(event) {
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
-    SpreadsheetApp.getActiveSpreadsheet().getSheets()[0].appendRow([
+    const sheet = SpreadsheetApp.openById(SHEET_ID).getSheets()[0];
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(HEADERS);
+      sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight("bold");
+      sheet.setFrozenRows(1);
+    }
+    sheet.appendRow([
       new Date(),
       name,
       phone,
